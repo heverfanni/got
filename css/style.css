@@ -1,0 +1,39 @@
+body {
+    background-image: url("/assets/site/mapblue.jpg");
+    position: fixed;
+    margin: 0;
+    padding: 0;
+}
+
+.characters {
+    padding: 100px 320px 100px 100px;
+    width: calc(70% - 30px);
+    float: left;
+}
+
+.side-panel {
+    background-color: #39393A;
+    right: 0;
+    height: 100%;
+    width: 320px;
+    position: fixed;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.search {
+    position: absolute;
+    bottom: 20px;
+}
+
+.character {
+    display: inline-block;
+    text-align: center;
+    width: 12.5%;
+    margin-bottom: 30px;
+}
+
+.character>img {
+    width: 60px;
+    height: 60px;
+}
