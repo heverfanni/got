@@ -16,9 +16,8 @@ function successAjax(xhttp) {
     var alive = livingCharacters(userDatas);
     sortByName(alive);
     console.log(alive);
-    searchInCharacters(alive, "Jorah Mormont");
     createCharacters(alive);
-    houseSwitch()
+    initSearch(alive);
 
     /*
       Pár sorral lejebb majd ezt olvashatod:
@@ -92,27 +91,29 @@ function createCharacters(characters) {
     var divCharacters = document.querySelector(".characters");
 
     for (var i = 0; i < characters.length; i++) {
-        var aktualis = characters[i];
-        var divImg = document.createElement("div");
-        var divText = document.createElement("div");
-        var img = document.createElement("img");
+        (function () {
+            var character = characters[i];
+            var divImg = document.createElement("div");
+            var divText = document.createElement("div");
+            var img = document.createElement("img");
 
-        img.setAttribute("src", characters[i].portrait);
-        img.setAttribute("alt", characters[i].name);
+            img.setAttribute("src", characters[i].portrait);
+            img.setAttribute("alt", characters[i].name);
 
-        divImg.appendChild(img);
-        divText.innerHTML = characters[i].name;
-        divImg.classList.add("character");
-        //divImg.setAttribute("onclick", "showCharacterDetail('aktualis')");
-        divCharacters.appendChild(divImg).appendChild(divText);
-        divImg.addEventListener("click", function () {
-            showCharacterDetail(aktualis);
-        })
+            divImg.appendChild(img);
+            divText.innerHTML = characters[i].name;
+            divImg.classList.add("character");
+            divCharacters.appendChild(divImg).appendChild(divText);
+            divImg.addEventListener("click", function () {
+                showCharacterDetail(character);
+            })
+        })()
     }
 }
 
+
+
 function showCharacterDetail(character) {
-    console.log(character);
     var characterImage = document.querySelector(".character-image");
     var name = document.querySelector(".name");
     var bio = document.querySelector(".bio");
@@ -121,66 +122,26 @@ function showCharacterDetail(character) {
     var span = document.createElement("span");
     var houseImg = document.createElement("img");
 
+    characterImage.innerHTML = "";
+    name.innerHTML = "";
+
+    houseImg.setAttribute("src", "/assets/houses/" + (character.house || character.organization) + ".png")
+    houseImg.setAttribute("alt", character.house);
     img.setAttribute("src", character.picture);
     img.setAttribute("alt", character.name);
     span.innerHTML = character.name;
-    //houseImg.innerHTML = houseSwitch(character);
     bio.innerHTML = character.bio;
 
     characterImage.appendChild(img);
     name.appendChild(span);
     name.appendChild(houseImg);
-
 }
 
-function houseSwitch(character) {
-    switch (character.house || character.organization) {
-        case "baratheon":
-            houseImg.setAttribute("src", "/assets/houses/baratheon.png")
-            img.setAttribute("alt", character.house);
-            break;
-        case "clegane":
-            houseImg.setAttribute("src", "/assets/houses/clegane.png")
-            img.setAttribute("alt", character.house);
-            break;
-        case "greyjoy":
-            houseImg.setAttribute("src", "/assets/houses/greyjoy.png")
-            img.setAttribute("alt", character.house);
-            break;
-        case "lannister":
-            houseImg.setAttribute("src", "/assets/houses/lannister.png")
-            img.setAttribute("alt", character.house);
-            break;
-        case "mormont":
-            houseImg.setAttribute("src", "/assets/houses/mormont.png")
-            img.setAttribute("alt", character.house);
-            break;
-        case "nightwatch":
-            houseImg.setAttribute("src", "/assets/houses/nightwatch.png")
-            img.setAttribute("alt", character.house);
-            break;
-        case "royalguard":
-            houseImg.setAttribute("src", "/assets/houses/royalguard.png")
-            img.setAttribute("alt", character.house);
-            break;
-        case "stark":
-            houseImg.setAttribute("src", "/assets/houses/stark.png")
-            img.setAttribute("alt", character.house);
-            break;
-        case "targaryen":
-            houseImg.setAttribute("src", "/assets/houses/targaryen.png")
-            img.setAttribute("alt", character.house);
-            break;
-        case "tarly":
-            houseImg.setAttribute("src", "/assets/houses/tarly.png")
-            img.setAttribute("alt", character.house);
-            break;
-        case "tully":
-            houseImg.setAttribute("src", "/assets/houses/tully.png")
-            img.setAttribute("alt", character.house);
-            break;
-        default:
-            houseImg.setAttribute("src", "");
-            break;
-    }
+function initSearch(characters) {
+    var button = document.querySelector("button");
+    button.addEventListener("click", function () {
+        var input = document.querySelector("input").value;
+        var character = searchInCharacters(characters, input);
+        showCharacterDetail(character);
+    })
 }
