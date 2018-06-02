@@ -1,3 +1,8 @@
+@font-face {
+    font-family: GameOfThrones;
+    src: url(/fonts/got.ttf);
+}
+
 body {
     background-image: url("/assets/site/mapblue.jpg");
     position: fixed;
@@ -6,19 +11,19 @@ body {
 }
 
 .characters {
-    padding: 100px 320px 100px 100px;
-    width: calc(70% - 30px);
-    float: left;
+    padding: 50px 400px 100px 50px;
 }
 
 .side-panel {
     background-color: #39393A;
     right: 0;
+    top: 0;
     height: 100%;
-    width: 320px;
+    width: 350px;
     position: fixed;
     padding: 20px;
     box-sizing: border-box;
+    color: white;
 }
 
 .search {
@@ -34,6 +39,52 @@ body {
 }
 
 .character>img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.characters>div {
+    text-transform: uppercase;
+    color: rgb(127, 105, 97);
+    font-size: 10px;
+    font-weight: bold;
+    font-family: GameOfThrones;
+    letter-spacing: 1px;
+}
+
+h3 {
+    font-family: GameOfThrones;
+    text-align: center;
+    font-weight: 100;
+    letter-spacing: 2px;
+}
+
+.name>span {
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+
+.name>img {
+    float: right;
+}
+
+.character-image>img {
+    width: 100%;
+}
+
+.characters>div.active {
+    color: rgb(50, 34, 17);
+    font-weight: 900;
+}
+
+input {
+    width: 200px;
+    padding: 5px;
+}
+
+button {
+    padding: 5px;
 }

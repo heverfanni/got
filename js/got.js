@@ -87,6 +87,14 @@ function searchInCharacters(characters, searchString) {
     return "Nincs találat!";
 }
 
+function removeActive() {
+    var active = document.querySelector(".characters>div.active");
+
+    if (active) {
+        active.classList.remove("active");
+    }
+}
+
 function createCharacters(characters) {
     var divCharacters = document.querySelector(".characters");
 
@@ -104,7 +112,10 @@ function createCharacters(characters) {
             divText.innerHTML = characters[i].name;
             divImg.classList.add("character");
             divCharacters.appendChild(divImg).appendChild(divText);
-            divImg.addEventListener("click", function () {
+            divImg.addEventListener("click", function (event) {
+                var characterDiv = this;
+                removeActive();
+                characterDiv.classList.add("active");
                 showCharacterDetail(character);
             })
         })()
@@ -114,28 +125,51 @@ function createCharacters(characters) {
 
 
 function showCharacterDetail(character) {
+    showCharacterImage(character);
+    showCharacterName(character);
+    showCharacterBio(character);
+}
+
+function showCharacterImage(character) {
     var characterImage = document.querySelector(".character-image");
-    var name = document.querySelector(".name");
-    var bio = document.querySelector(".bio");
+    if (!character.picture) {
+        characterImage.innerHTML = "Kép nem található!";
+    }
 
     var img = document.createElement("img");
+
+    characterImage.innerHTML = "";
+
+    img.setAttribute("src", character.picture);
+    img.setAttribute("alt", character.name);
+
+    characterImage.appendChild(img);
+}
+
+function showCharacterName(character) {
+    var name = document.querySelector(".name");
     var span = document.createElement("span");
     var houseImg = document.createElement("img");
 
-    characterImage.innerHTML = "";
     name.innerHTML = "";
 
-    houseImg.setAttribute("src", "/assets/houses/" + (character.house || character.organization) + ".png")
-    houseImg.setAttribute("alt", character.house);
-    img.setAttribute("src", character.picture);
-    img.setAttribute("alt", character.name);
+    if (character.house || character.organization) {
+        houseImg.setAttribute("src", "/assets/houses/" + (character.house || character.organization) + ".png")
+        houseImg.setAttribute("alt", character.house);
+        name.appendChild(houseImg);
+    }
     span.innerHTML = character.name;
-    bio.innerHTML = character.bio;
-
-    characterImage.appendChild(img);
     name.appendChild(span);
-    name.appendChild(houseImg);
+
+
 }
+
+function showCharacterBio(character) {
+    var bio = document.querySelector(".bio");
+    bio.innerHTML = character.bio;
+}
+
+
 
 function initSearch(characters) {
     var button = document.querySelector("button");
