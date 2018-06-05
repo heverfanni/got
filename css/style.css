@@ -11,7 +11,7 @@ body {
 }
 
 .characters {
-    padding: 35px 385px 120px 35px;
+    padding: 5px 355px 120px 5px;
 }
 
 .side-panel {
@@ -32,25 +32,36 @@ body {
 }
 
 .character {
-    display: inline-block;
     text-align: center;
     width: 12.5%;
     margin-bottom: 10px;
+    float: left;
+    cursor: crosshair;
 }
 
 .character>img {
-    width: 65px;
-    height: 65px;
+    width: 60px;
+    height: 60px;
     margin-bottom: 10px;
+    border-radius: 50%;
+    transition: all 1s;
 }
 
-.characters>div {
+.character:hover img {
+    box-shadow: 9px 9px 100px 9px rgba(0, 0, 0, 0.75);
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.character>div {
     text-transform: uppercase;
     color: rgb(127, 105, 97);
-    font-size: 6px;
+    font-size: 9px;
     font-weight: bold;
     font-family: GameOfThrones;
     letter-spacing: 1px;
+    line-height: 1.4em;
+    min-height: 2.8em;
 }
 
 h3 {
