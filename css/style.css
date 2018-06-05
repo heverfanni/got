@@ -11,7 +11,7 @@ body {
 }
 
 .characters {
-    padding: 50px 400px 100px 50px;
+    padding: 35px 385px 120px 35px;
 }
 
 .side-panel {
@@ -35,19 +35,19 @@ body {
     display: inline-block;
     text-align: center;
     width: 12.5%;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .character>img {
-    width: 80px;
-    height: 80px;
+    width: 65px;
+    height: 65px;
     margin-bottom: 10px;
 }
 
 .characters>div {
     text-transform: uppercase;
     color: rgb(127, 105, 97);
-    font-size: 10px;
+    font-size: 6px;
     font-weight: bold;
     font-family: GameOfThrones;
     letter-spacing: 1px;
