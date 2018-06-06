@@ -86,7 +86,7 @@ h3 {
     width: 100%;
 }
 
-.characters>div.active {
+.character.active>div {
     color: rgb(50, 34, 17);
     font-weight: 900;
 }
